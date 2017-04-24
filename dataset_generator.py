@@ -129,34 +129,6 @@ def write_labels_file(exp_dir, labels):
         for i, label in enumerate(unique_labels):
             f.write('%s %s\n'%(i, label))
 
-def write_scene_anno_file(anno, anno_file):
-    if os.path.exists(anno_file):
-        return anno_file
-    
-    top = Element('annotation')
-    for obj in anno:
-        # 'category','instance','top','bottom','left', 'right'
-        object_root = SubElement(top, 'object')
-        object_type = str(obj[0][0][0][0])
-        object_type_entry = SubElement(object_root, 'name')
-        object_type_entry.text = str(object_type)
-        object_bndbox_entry = SubElement(object_root, 'bndbox')
-        ymin, xmin, ymax, xmax = obj[2][0], obj[3][0], obj[4][0], obj[5][0]
-        x_min_entry = SubElement(object_bndbox_entry, 'xmin')
-        x_min_entry.text = '%d'%xmin
-        x_max_entry = SubElement(object_bndbox_entry, 'xmax')
-        x_max_entry.text = '%d'%xmax
-        y_min_entry = SubElement(object_bndbox_entry, 'ymin')
-        y_min_entry.text = '%d'%ymin
-        y_max_entry = SubElement(object_bndbox_entry, 'ymax')
-        y_max_entry.text = '%d'%ymax
-        difficult_entry = SubElement(object_root, 'difficult')
-        difficult_entry.text = '0'
-
-    xmlstr = xml.dom.minidom.parseString(tostring(top)).toprettyxml(indent="    ")
-    with open(anno_file, "w") as f:
-        f.write(xmlstr)
-
 def keep_selected_labels(img_files, labels):
     with open(SELECTED_LIST_FILE) as f:
         selected_labels = [x.strip() for x in f.readlines()]
