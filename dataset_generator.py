@@ -60,7 +60,7 @@ def parse_args():
     parser.add_argument("exp",
       help="The directory where images and annotation lists will be created.")
     parser.add_argument("--selected",
-      help="Keep only selected instances in the test dataset. Default is to not keep all instances.", action="store_true")
+      help="Keep only selected instances in the test dataset. Default is to keep all instances in the roo directory", action="store_true")
     parser.add_argument("--scale",
       help="Add scale augmentation.Default is to not add scale augmentation.", action="store_true")
     parser.add_argument("--rotation",
