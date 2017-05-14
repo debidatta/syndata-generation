@@ -11,8 +11,38 @@ This code is used to generate synthetic scenes for the task of instance/object d
 To be able to generate scenes this code assumes you have the object masks for all images. There is no pre-requisite on what algorithm is used to generate these masks as for different applications different algorithms might end up doing a good job. However, we recommend Graph Cut or Pixel Objectness with CRF/Bilinear Pooling to generate these masks.
 
 ## Setting up Defaults
+The first section in the defaults.py file contains paths to various files and libraries. Set them up accordingly.
+
+The other defaults refer to different image generating parameters that might be varied to produce scenes with different levels of clutter, occlusion, data augmentation etc. 
 
 ## Running the Script
+```
+python dataset_generator.py [-h] [--selected] [--scale] [--rotation]
+                            [--num NUM] [--dontocclude] [--add_distractors]
+                            root exp
+
+Create dataset with different augmentations
+
+positional arguments:
+  root               The root directory which contains the images and
+                     annotations.
+  exp                The directory where images and annotation lists will be
+                     created.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --selected         Keep only selected instances in the test dataset. Default
+                     is to keep all instances in the roo directory.
+  --scale            Add scale augmentation.Default is to not add scale
+                     augmentation.
+  --rotation         Add rotation augmentation.Default is to not add rotation
+                     augmentation.
+  --num NUM          Number of times each image will be in dataset
+  --dontocclude      Add objects without occlusion. Default is to produce
+                     occlusions
+  --add_distractors  Add distractors objects. Default is to not use
+                     distractors
+```
 
 ## Training an object detector
 The code produces all the files required to train an object detector. The format is directly useful for Faster R-CNN but might be adapted for different object detectors too. The different files produced are:
