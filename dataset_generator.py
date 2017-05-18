@@ -180,7 +180,7 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
            mask_file =  get_mask_file(obj[0])
            mask = Image.open(mask_file)
            mask = mask.crop((xmin, ymin, xmax, ymax))
-           
+           o_w, o_h = orig_w, orig_h
            if scale_augment:
                 while True:
                     scale = random.uniform(MIN_SCALE, MAX_SCALE)
@@ -280,16 +280,17 @@ def gen_syn_data(img_files, labels, img_dir, anno_dir, scale_augment, rotation_a
     print "Number of background images : %s"%len(background_files) 
     img_labels = zip(img_files, labels)
     random.shuffle(img_labels)
-    
-    with open(DISTRACTOR_LIST_FILE) as f:
-        distractor_labels = [x.strip() for x in f.readlines()]
-    
-    distractor_list = []
-    for distractor_label in distractor_labels:
-        distractor_list += glob.glob(os.path.join(DISTRACTOR_DIR, distractor_label, DISTRACTOR_GLOB_STRING))
-    
-    distractor_files = zip(distractor_list, len(distractor_list)*[None])
-    random.shuffle(distractor_files)
+
+    if add_distractors:
+        with open(DISTRACTOR_LIST_FILE) as f:
+            distractor_labels = [x.strip() for x in f.readlines()]
+
+        distractor_list = []
+        for distractor_label in distractor_labels:
+            distractor_list += glob.glob(os.path.join(DISTRACTOR_DIR, distractor_label, DISTRACTOR_GLOB_STRING))
+
+        distractor_files = zip(distractor_list, len(distractor_list)*[None])
+        random.shuffle(distractor_files)
 
     idx = 0
     img_files = []
