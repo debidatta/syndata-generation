@@ -8,7 +8,7 @@ This code is used to generate synthetic scenes for the task of instance/object d
 3. Poisson Blending (Follow instructions [here](https://github.com/yskmt/pb)
 4. PyBlur (pip install pyblur)
 
-To be able to generate scenes this code assumes you have the object masks for all images. There is no pre-requisite on what algorithm is used to generate these masks as for different applications different algorithms might end up doing a good job. However, we recommend Graph Cut or Pixel Objectness with CRF/Bilinear Pooling to generate these masks.
+To be able to generate scenes this code assumes you have the object masks for all images. There is no pre-requisite on what algorithm is used to generate these masks as for different applications different algorithms might end up doing a good job. However, we recommend [Pixel Objectness with Bilinear Pooling](https://github.com/debidatta/pixelobjectness-bp) to automatically generate these masks. If you want to annotate the image manually we recommend GrabCut algorithms([here](https://github.com/opencv/opencv/blob/master/samples/python/grabcut.py), [here](https://github.com/cmuartfab/grabcut), [here](https://github.com/daviddoria/GrabCut))
 
 ## Setting up Defaults
 The first section in the defaults.py file contains paths to various files and libraries. Set them up accordingly.
