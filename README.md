@@ -54,3 +54,7 @@ The code produces all the files required to train an object detector. The format
 There are tutorials describing how one can adapt Faster R-CNN code to run on a custom dataset like:
 1. https://github.com/rbgirshick/py-faster-rcnn/issues/243
 2. http://sgsai.blogspot.com/2016/02/training-faster-r-cnn-on-custom-dataset.html
+
+## Paper
+
+The code was used to generate synthetic scenes for the paper [Cut, Paste and Learn: Surprisingly Easy Synthesis for Instance Detection](https://arxiv.org/abs/1708.01642).
