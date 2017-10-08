@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<annotation>
+    <object>
+        <name>honey_bunches</name>
+        <bndbox>
+            <xmin>193</xmin>
+            <xmax>295</xmax>
+            <ymin>104</ymin>
+            <ymax>221</ymax>
+        </bndbox>
+        <difficult>0</difficult>
+    </object>
+    <object>
+        <name>mahatma_rice</name>
+        <bndbox>
+            <xmin>313</xmin>
+            <xmax>441</xmax>
+            <ymin>1</ymin>
+            <ymax>93</ymax>
+        </bndbox>
+        <difficult>0</difficult>
+    </object>
+    <object>
+        <name>honey_bunches</name>
+        <bndbox>
+            <xmin>421</xmin>
+            <xmax>626</xmax>
+            <ymin>232</ymin>
+            <ymax>480</ymax>
+        </bndbox>
+        <difficult>0</difficult>
+    </object>
+    <object>
+        <name>mahatma_rice</name>
+        <bndbox>
+            <xmin>505</xmin>
+            <xmax>604</xmax>
+            <ymin>266</ymin>
+            <ymax>324</ymax>
+        </bndbox>
+        <difficult>0</difficult>
+    </object>
+</annotation>

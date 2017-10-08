@@ -1,0 +1,5 @@
+output_dir/images/1_gaussian.jpg output_dir/annotations/1.xml
+output_dir/images/1_poisson.jpg output_dir/annotations/1.xml
+output_dir/images/1_none.jpg output_dir/annotations/1.xml
+output_dir/images/1_box.jpg output_dir/annotations/1.xml
+output_dir/images/1_motion.jpg output_dir/annotations/1.xml
