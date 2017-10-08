@@ -137,6 +137,8 @@ def get_annotation_from_mask_file(mask_file, scale=1.0):
     '''
     if os.path.exists(mask_file):
         mask = cv2.imread(mask_file)
+        if INVERTED_MASK:
+            mask = 255 - mask
         rows = np.any(mask, axis=1)
         cols = np.any(mask, axis=0)
         if len(np.where(rows)[0]) > 0:
@@ -285,6 +287,8 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
            mask_file =  get_mask_file(obj[0])
            mask = Image.open(mask_file)
            mask = mask.crop((xmin, ymin, xmax, ymax))
+           if INVERTED_MASK:
+               mask = Image.fromarray(255-PIL2array1C(mask))
            o_w, o_h = orig_w, orig_h
            if scale_augment:
                 while True:
@@ -305,7 +309,6 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
                         break
                mask = mask_tmp
                foreground = foreground_tmp
-           
            xmin, xmax, ymin, ymax = get_annotation_from_mask(mask)
            attempt = 0
            while True:
@@ -426,6 +429,7 @@ def gen_syn_data(img_files, labels, img_dir, anno_dir, scale_augment, rotation_a
             n = min(random.randint(MIN_NO_OF_DISTRACTOR_OBJECTS, MAX_NO_OF_DISTRACTOR_OBJECTS), len(distractor_files))
             for i in xrange(n):
                 distractor_objects.append(random.choice(distractor_files))
+        print distractor_objects, distractor_files
         idx += 1
         bg_file = random.choice(background_files)
         for blur in BLENDING_LIST:
@@ -487,11 +491,11 @@ def parse_args():
     parser.add_argument("exp",
       help="The directory where images and annotation lists will be created.")
     parser.add_argument("--selected",
-      help="Keep only selected instances in the test dataset. Default is to keep all instances in the roo directory", action="store_true")
+      help="Keep only selected instances in the test dataset. Default is to keep all instances in the root directory", action="store_true")
     parser.add_argument("--scale",
-      help="Add scale augmentation.Default is to not add scale augmentation.", action="store_true")
+      help="Add scale augmentation.Default is to add scale augmentation.", action="store_false")
     parser.add_argument("--rotation",
-      help="Add rotation augmentation.Default is to not add rotation augmentation.", action="store_true")
+      help="Add rotation augmentation.Default is to add rotation augmentation.", action="store_false")
     parser.add_argument("--num",
       help="Number of times each image will be in dataset", default=1, type=int)
     parser.add_argument("--dontocclude",
