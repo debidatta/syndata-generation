@@ -267,6 +267,7 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
         return anno_file
     
     all_objects = objects + distractor_objects
+    assert len(all_objects) > 0
     while True:
         top = Element('annotation')
         background = Image.open(bg_file)
