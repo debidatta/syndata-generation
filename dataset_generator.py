@@ -289,7 +289,7 @@ def create_image_anno(objects, distractor_objects, img_file, anno_file, bg_file,
            mask = Image.open(mask_file)
            mask = mask.crop((xmin, ymin, xmax, ymax))
            if INVERTED_MASK:
-               mask = Image.fromarray(255-PIL2array1C(mask))
+               mask = Image.fromarray(255-PIL2array1C(mask)).convert('1')
            o_w, o_h = orig_w, orig_h
            if scale_augment:
                 while True:
